@@ -1,10 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import UIkit from "uikit";
+import "uikit/dist/css/uikit.min.css";
+import Icons from "uikit/dist/js/uikit-icons.min.js";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+UIkit.use(Icons);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />

@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ContextState from "./context_state_config";
 
 function App() {
   const [state, setState] = useState("");
@@ -15,7 +16,7 @@ function App() {
   return (
     <div>
       Home
-      <p>{state}</p>
+      <ContextState />
     </div>
   );
 }
