@@ -1,17 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 import axios from "axios";
 import moment from "moment";
 import Context from "../utils/context";
 
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
 
 import "../App.css";
 import "../styles/pagination.css";
@@ -93,47 +88,39 @@ const Posts = (props) => {
 
   const RenderPosts = (post) => (
     <div>
-      <Card>
-        <CardHeader
-          title={
-            <Link to={{ pathname: "/post/" + post.post.pid, state: { post } }}>
-              {post.post.title}
+      <div className="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+        <h3 className="uk-card-title">
+          <Link to={{ pathname: "/post/" + post.post.pid, state: { post } }}>
+            {post.post.title}
+          </Link>
+        </h3>
+        <div className="uk-flex-column">
+          <div className="uk-flex-row">
+            {moment(post.post.date_created).format("MMMM Do, YYYY | h:mm a")}
+          </div>
+          <div className="uk-flex-row">
+            By:
+            <Link
+              style={{ paddingLeft: "5px", textDecoration: "none" }}
+              to={{
+                pathname: "/user/" + post.post.author,
+                state: { post },
+              }}
+            >
+              {post.post.author}
             </Link>
-          }
-          subheader={
-            <div className="FlexColumn">
-              <div className="FlexRow">
-                {moment(post.post.date_created).format(
-                  "MMMM Do, YYYY | h:mm a"
-                )}
-              </div>
-              <div className="FlexRow">
-                By:
-                <Link
-                  style={{ paddingLeft: "5px", textDecoration: "none" }}
-                  to={{
-                    pathname: "/user/" + post.post.author,
-                    state: { post },
-                  }}
-                >
-                  {post.post.author}
-                </Link>
-              </div>
-              <div className="FlexRow">
-                <i className="material-icons">thumb_up</i>
-                <div className="notification-num-allposts">
-                  {" "}
-                  {post.post.likes}{" "}
-                </div>
-              </div>
-            </div>
-          }
-        />
+          </div>
+          <div className="uk-flex-row">
+            <a href="" data-uk-icon="heart"></a>
+            <i className="material-icons">thumb_up</i>
+            <div className="notification-num-allposts">{post.post.likes}</div>
+          </div>
+        </div>
         <br />
-        <CardContent>
+        <p>
           <span style={{ overflow: "hidden" }}> {post.post.body} </span>
-        </CardContent>
-      </Card>
+        </p>
+      </div>
     </div>
   );
 
@@ -211,6 +198,9 @@ const Posts = (props) => {
           </Link>
         ) : (
           <Link to="/signup">
+            <NavLink to="/signup" className="btn btn-actions">
+              Sign Up to Add Post
+            </NavLink>
             <Button variant="contained" color="primary">
               Sign Up to Add Post
             </Button>
@@ -218,12 +208,20 @@ const Posts = (props) => {
         )}
       </div>
       <br />
-      <TextField
-        id="search"
-        label="Search"
-        margin="normal"
-        onChange={handleSearch}
-      />
+      <div className="search-input">
+        <form
+          className="uk-search uk-search-default uk-width-1-1"
+          onSubmit={handleSubmit}
+        >
+          <span className="uk-search-icon-flip" data-uk-search-icon></span>
+          <input
+            className="uk-search-input"
+            type="search"
+            placeholder="Search  for an item here"
+            onChange={handleSearch}
+          />
+        </form>
+      </div>
       <hr />
 
       <br />
@@ -244,7 +242,7 @@ const Posts = (props) => {
           : null}
       </div>
       <div>
-        <div className="FlexRow">
+        <div className="uk-flex-row">
           <button onClick={() => page_change(1)}> First </button>
           <button onClick={() => page_change(stateLocal.currentPage - 1)}>
             {" "}

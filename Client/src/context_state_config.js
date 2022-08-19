@@ -7,7 +7,7 @@ import * as AuthReducer from "./store/reducers/auth_reducer";
 import * as FormReducer from "./store/reducers/form_reducer";
 import * as PostsReducer from "./store/reducers/posts_reducer";
 
-import Routes from "./routes";
+import MyRoutes from "./myRoutes";
 
 import Auth from "./utils/auth";
 
@@ -97,7 +97,7 @@ const ContextState = (props) => {
   );
 
   const handleSetPosts = (posts) => {
-    dispatchPostsReducer(ACTIONS.set_db_posts(posts));
+    dispatchPostsReducer(ACTIONS.fetch_db_posts(posts));
   };
 
   const handleRemovePosts = () => {
@@ -149,7 +149,7 @@ const ContextState = (props) => {
           authObj: auth,
         }}
       >
-        <Routes />
+        <MyRoutes />
       </Context.Provider>
     </div>
   );
