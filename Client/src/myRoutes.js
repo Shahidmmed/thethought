@@ -11,9 +11,9 @@ import history from "./utils/history";
 import Context from "./utils/context";
 import Header from "./hooks/header";
 import Callback from "./hooks/callback";
+import Home from "./hooks/home";
 /* import AuthCheck from "./utils/authcheck";
 
-import Home from "./hooks/home";
 
 import HooksContainer1 from "./hooks/hook1";
 
@@ -46,7 +46,7 @@ const PrivateRoute = ({ component: Component, auth }) => (
 
 const MyRoutes = () => {
   const context = useContext(Context);
-  // const params = useParams();
+  const params = useParams();
   // useEffect(() => {
   //   /* If context is avialable here. */
   //   context.handleAuth(params);
@@ -62,6 +62,17 @@ const MyRoutes = () => {
         <br />
         <div>
           <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <Home
+                  props={(props) => {
+                    context.handleAuth(props);
+                  }}
+                />
+              }
+            />
             <Route exact path="/add" element={AddPost} />
             <Route path="/signup" element={SignUp} />
             {/* <Route path="/hooksform" element={HooksForm} />
@@ -118,6 +129,7 @@ const MyRoutes = () => {
                 return <Callback />;
               }}
             /> */}
+            {/* <Route path="/callback" element={<Callback />} /> */}
             <Route path="/callback" element={<Callback />} />
           </Routes>
         </div>

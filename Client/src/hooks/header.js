@@ -4,6 +4,7 @@ import Context from "../utils/context";
 
 const Header = () => {
   const context = useContext(Context);
+  console.log("state", context.authState);
 
   return (
     <div>

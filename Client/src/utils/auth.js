@@ -18,6 +18,7 @@ export default class Auth {
 
   handleAuth = () => {
     this.auth0.parseHash((err, authResult) => {
+      console.log("res", authResult);
       if (authResult) {
         localStorage.setItem("access_token", authResult.accessToken);
         localStorage.setItem("id_token", authResult.idToken);

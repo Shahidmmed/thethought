@@ -106,9 +106,9 @@ const ContextState = (props) => {
 
   //Handle authentication from callback
   const handleAuthentication = (props) => {
-    if (props.location.hash) {
-      auth.handleAuth();
-    }
+    // if (props.location.hash) {
+    auth.handleAuth(props);
+    // }
   };
 
   return (
